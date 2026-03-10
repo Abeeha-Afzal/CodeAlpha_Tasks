@@ -14,7 +14,7 @@ The program performs the following operations:
 - Converts letter grades into **grade points**
 - Calculates **total credit hours**
 - Calculates **semester GPA**
-- Computes the **overall CGPA including previous semesters**
+- Computes the **Computes the overall CGPA using previous academic record and current semester results**
 - Displays a complete **student academic report**
 
 ## Program Structure
@@ -22,7 +22,7 @@ The program performs the following operations:
 The program is organized using multiple classes:
 
 ### StudentInfo
-Stores and displays the **student's basic information**.
+Stores and displays the **student's name**.
 
 ### Course
 Stores **course grade and credit hours** and converts grades into grade points.
@@ -34,7 +34,7 @@ Manages courses using a **vector** and calculates:
 - Semester GPA
 
 ### CGPA
-Calculates the **overall CGPA** using previous credits, previous CGPA, and current semester results.
+Calculates the **overall CGPA** using previous credits, previous CGPA and current semester results.
 
 ### Student
 Combines all components and generates the **final report**.
