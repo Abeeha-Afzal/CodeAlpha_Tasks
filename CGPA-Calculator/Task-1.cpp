@@ -85,54 +85,89 @@ double get_TotalGradePoints(){
     for(int i = 0;i<(int)course.size(); i++){
         total = total + course[i].get_Gradepoints();
     }
-    return total;
-}
+    return total;}
     double Calculate_GPA(){
-        return get_TotalGradePoints() / get_TotalCredits();
+    if(get_TotalCredits() == 0){
+        return 0;
     }
-        void displayCourses(){
-        for(int i= 0;i<(int)course.size(); i++){
-            cout << "\nCourse "<<i +1<< endl;
-            course[i].display_Course();
-        }
+    return get_TotalGradePoints() / get_TotalCredits();
+}
+    void display_Course(){
+    for(int i = 0; i < (int)course.size(); i++){
+        cout << "\nCourse " << i + 1 << endl;
+        course[i].display_Course();
     }
+}
 };
-class Student : public StudentInfo{
-    Semester semester;
+class CGPA{
+    int prev_credits;
+    double prev_CGPA;
 public:
-    Student(string n) : StudentInfo(n){}
-    void add_Student_Course(Course c){
+    CGPA(int pc,double cg){
+        prev_credits=pc;
+        prev_CGPA=cg;
+    }
+    double overallCGPA(double currentPoints,int currentCredits){
+    double prev_points = prev_CGPA * prev_credits;
+    int totalCredits = prev_credits + currentCredits;
+    if(totalCredits == 0){
+        return 0;
+    }
+    return (prev_points + currentPoints) / totalCredits;
+}
+};
+class Student: public StudentInfo{
+    Semester semester;
+    CGPA cg;
+    public:
+    Student(string n,int pc,double cgpa) : StudentInfo(n), cg(pc,cgpa){}
+    void addCourse(Course c){
         semester.addCourse(c);
     }
-    void display_Report(){
+    void report(){
         display_info();
-        cout <<"\nCourse Details" << endl;
-        semester.displayCourses();
-        cout <<"\nTotal Credit Hours:"<<semester.get_TotalCredits() << endl;
-        cout <<"Total Grade Points:"<<semester.get_TotalGradePoints() << endl;
-        cout << "\033[1m\033[32mSemester GPA: " << semester.Calculate_GPA() << "\033[0m" << endl;
-    }
-};
-int main(){
-    string name;
-    int total_courses;
-    cout <<"Enter student name: ";
-    getline(cin,name);
-    Student s1(name);
-    cout<<"Enter number of courses: ";
-    cin>>total_courses;
-    for(int i = 0; i<total_courses; i++){
-        string grade;
-        int credit_hrs;
-        cout<<"\nEnter grade for course "<<i+1<<":";
-        cin>>grade;
-        cout<<"Enter credit hours for course "<<i+1<<":";
-        cin >>credit_hrs;
-        Course c1(grade,credit_hrs);
-        s1.add_Student_Course(c1);
-    }
-    cout << "\n===== Final Semester Report =====" << endl;
-    s1.display_Report();
+        cout<<"\nCourse Details\n";
+        semester.display_Course();
 
+        cout<<"\nTotal Credits: "<<semester.get_TotalCredits()<<endl;
+        cout << "\033[1;32mSemester GPA: " << semester.Calculate_GPA() << "\033[0m" << endl;
+        cout << "\033[1;32mOverall CGPA: "<< cg.overallCGPA(semester.get_TotalGradePoints(),semester.get_TotalCredits())<< "\033[0m" << endl;
+}
+};
+
+int main(){
+
+    string name;
+    int courses;
+
+    int prevCredits;
+    double prevCGPA;
+
+    cout<<"Enter student name: ";
+    getline(cin,name);
+
+    cout<<"Enter previous total credits: ";
+    cin>>prevCredits;
+
+    cout<<"Enter previous CGPA: ";
+    cin>>prevCGPA;
+
+    Student s(name,prevCredits,prevCGPA);
+
+    cout<<"Enter number of courses: ";
+    cin>>courses;
+
+    for(int i=0;i<courses;i++){
+        string grade;
+        int credit;
+        cout<<"\nGrade for course "<<i+1<<": ";
+        cin>>grade;
+        cout<<"Credit hours: ";
+        cin>>credit;
+        Course c(grade,credit);
+        s.addCourse(c);
+    }
+    cout<<"\n===== Final Report =====\n";
+    s.report();
     return 0;
 }
