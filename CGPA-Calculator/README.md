@@ -42,7 +42,7 @@ Combines all components and generates the **final report**.
 ## OOP Concepts Used
 
 - **Encapsulation** – Data and functions are organized inside classes.
-- **Inheritance** – `Student` inherits from `StudentInfo`.
+- **Inheritance** – Student inherits from StudentInfO.
 - **Abstraction** – GPA and CGPA calculations are handled in separate classes.
 
 ## Features
