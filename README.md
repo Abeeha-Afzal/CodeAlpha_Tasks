@@ -8,6 +8,7 @@ The projects demonstrate problem solving skills and the use of Object-Oriented P
 
 1. CGPA Calculator
 2. Login System
+3. Banking System
 
 ## Technologies Used
 - C++
