@@ -1,2 +1,13 @@
-# CodeAlpha_Tasks
-This repository contains C++ programming tasks completed during the CodeAlpha internship. It includes implementations of various problem-solving exercises and assignments that demonstrate core C++ concepts and programming logic.
+# CodeAlpha Tasks
+
+This repository contains the C++ programming tasks I am completing during my CodeAlpha Internship.
+
+The projects demonstrate problem solving skills and the use of Object-Oriented Programming (OOP) concepts in C++.
+
+## Tasks
+
+1. CGPA Calculator
+
+## Technologies Used
+- C++
+- Object-Oriented Programming (OOP)
